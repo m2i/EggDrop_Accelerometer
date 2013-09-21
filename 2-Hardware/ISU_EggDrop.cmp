@@ -1,0 +1,164 @@
+Cmp-Mod V01 Created by PcbNew date = Mon 24 Jun 2013 06:23:54 PM CDT
+
+BeginCmp
+TimeStamp = /502A7669;
+Reference = BT1;
+ValeurCmp = CR2032;
+IdModule  = BATT_CR2032_MPD;
+EndCmp
+
+BeginCmp
+TimeStamp = /502C8EBC;
+Reference = C1;
+ValeurCmp = 1 uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A809D;
+Reference = C2;
+ValeurCmp = 0.1 uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A80D3;
+Reference = C3;
+ValeurCmp = 10 uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A80A3;
+Reference = C4;
+ValeurCmp = 0.1 uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /51C3C447;
+Reference = C5;
+ValeurCmp = 0.1uF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A8622;
+Reference = CARD1;
+ValeurCmp = uSD;
+IdModule  = MICRO_SD_HINGE_AMP;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A880F;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A880A;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = LED-1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /51C24FA5;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = CONN_1x3;
+EndCmp
+
+BeginCmp
+TimeStamp = /50EBA1B5;
+Reference = P1;
+ValeurCmp = CONN_5;
+IdModule  = CONN_1x5;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A80AA;
+Reference = R1;
+ValeurCmp = 4.7K;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A80AD;
+Reference = R2;
+ValeurCmp = 4.7K;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A8837;
+Reference = R3;
+ValeurCmp = 330;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A8834;
+Reference = R4;
+ValeurCmp = 330;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A89DA;
+Reference = R5;
+ValeurCmp = 10K;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B949AC;
+Reference = R6;
+ValeurCmp = 10k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B949B2;
+Reference = R7;
+ValeurCmp = 10k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B949B5;
+Reference = R8;
+ValeurCmp = 10k;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A7972;
+Reference = S1;
+ValeurCmp = ADXL345;
+IdModule  = LGA-14;
+EndCmp
+
+BeginCmp
+TimeStamp = /51AEB1D1;
+Reference = SW1;
+ValeurCmp = SWITCH_SPDT;
+IdModule  = SWITCH_DPST_TE;
+EndCmp
+
+BeginCmp
+TimeStamp = /51B94C56;
+Reference = SW2;
+ValeurCmp = ~;
+IdModule  = SWITCH_DIP_3;
+EndCmp
+
+BeginCmp
+TimeStamp = /502A8028;
+Reference = U1;
+ValeurCmp = PIC18F27J13;
+IdModule  = SO28;
+EndCmp
+
+EndListe

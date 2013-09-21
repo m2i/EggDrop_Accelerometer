@@ -1,0 +1,18 @@
+Hardware changelog for the ISU EggDrop accelerometer project
+
+Revision C:
+ * Added 3 DIP switches for accelerometer resolution/self test selection
+    -> Feature request
+ * Added ground terminal near UART terminals
+    -> Now easier to use the UART terminals
+ * Moved uSD card slot away from uC
+    -> When properly soldered to the pads the uSD card would not fit
+ * Changed CR2032 holder
+    -> Previous one was out of stock
+
+Revision B:
+ * Changed board dimensions
+    -> Old dimensions would not allow easy mounting in an egg
+
+Revision A:
+ * Initial hardware
