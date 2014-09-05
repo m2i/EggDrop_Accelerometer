@@ -35,15 +35,15 @@ intersection(){
 	}
 //translate([0,0,5])cube(40, center = true);
 }
-translate([0,-5,18])cube([34.5,47.5,20], center = true);
+translate([0,-8,18])cube([34.5,47.5,20], center = true);
 //T-lock
 translate([-5,-40,18])cube([5,10,25], center = true);
 translate([0,-40,18])cube([10,5,20], center = true);
 translate([0,-40,28])cube([10,10,5], center = true);
 
-translate([-5,25,18])cube([5,10,20], center = true);
-translate([0,25,18])cube([10,5,20], center = true);
-translate([0,25,27])cube([10,10,3], center = true);
+translate([-5,22,18])cube([5,10,20], center = true);
+translate([0,22,18])cube([10,5,20], center = true);
+translate([0,22,27])cube([10,10,3], center = true);
 }
 
 //Egg side B
@@ -66,7 +66,7 @@ intersection(){
 	}
 //translate([0,0,5])cube(40, center = true);
 }
-translate([0,-5,18])cube([34.5,47.5,20], center = true);
+translate([0,-8,18])cube([34.5,47.5,20], center = true);
 
 }
 //T-lock
@@ -76,8 +76,8 @@ translate([0,-36,23])cube([10,5,5], center = true);
 translate([0,-44,23])cube([10,5,5], center = true);
 }
 difference(){
-translate([0,25,23])cube([5,10,8], center = true);
-translate([0,29,23])cube([10,5,5], center = true);
-translate([0,21,23])cube([10,5,5], center = true);
+translate([0,22,23])cube([5,10,8], center = true);
+translate([0,26,23])cube([10,5,5], center = true);
+translate([0,18,23])cube([10,5,5], center = true);
 }
 }
