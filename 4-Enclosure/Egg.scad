@@ -11,6 +11,7 @@ radius=35;		//radius of egg
 stretch = 1.7;	//amount of "stretch" in the top half
 angle = 90;		//angle of egg (0 is vertical, 90 is on side)
 base = 2;	  //Sets how far down for base, max 2.4.  Nominal 2
+cutout = 5; //Sets the depth of the cutout in the egg
 
 fn = 150;
 
@@ -35,15 +36,16 @@ intersection(){
 	}
 //translate([0,0,5])cube(40, center = true);
 }
-translate([0,-8,18])cube([34.5,47.5,20], center = true);
+//This cuts out the opening for our circuit board
+translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
 //T-lock
-translate([-5,-40,18])cube([5,10,25], center = true);
+translate([-5,-40,18])cube([6,11,25], center = true);
 translate([0,-40,18])cube([10,5,20], center = true);
-translate([0,-40,28])cube([10,10,5], center = true);
+translate([0,-40,28])cube([11,11,5], center = true);
 
-translate([-5,22,18])cube([5,10,20], center = true);
-translate([0,22,18])cube([10,5,20], center = true);
-translate([0,22,27])cube([10,10,3], center = true);
+translate([-5,23,18])cube([6,11,20], center = true);
+translate([0,23,18])cube([10,5,20], center = true);
+translate([0,23,27])cube([11,11,3], center = true);
 }
 
 //Egg side B
@@ -66,7 +68,8 @@ intersection(){
 	}
 //translate([0,0,5])cube(40, center = true);
 }
-translate([0,-8,18])cube([34.5,47.5,20], center = true);
+//This cuts out the opening for our circuit board
+translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
 
 }
 //T-lock
@@ -76,8 +79,8 @@ translate([0,-36,23])cube([10,5,5], center = true);
 translate([0,-44,23])cube([10,5,5], center = true);
 }
 difference(){
-translate([0,22,23])cube([5,10,8], center = true);
-translate([0,26,23])cube([10,5,5], center = true);
-translate([0,18,23])cube([10,5,5], center = true);
+translate([0,23,23])cube([5,10,8], center = true);
+translate([0,27,23])cube([10,5,5], center = true);
+translate([0,19,23])cube([10,5,5], center = true);
 }
 }
