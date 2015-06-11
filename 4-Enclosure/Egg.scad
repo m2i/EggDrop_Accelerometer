@@ -37,7 +37,7 @@ intersection(){
 //translate([0,0,5])cube(40, center = true);
 }
 //This cuts out the opening for our circuit board
-translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
+translate([-12,-32,23])#bean_cutout();
 //T-lock
 translate([-5,-40,18])cube([6,11,25], center = true);
 translate([0,-40,18])cube([10,5,20], center = true);
@@ -69,7 +69,7 @@ intersection(){
 //translate([0,0,5])cube(40, center = true);
 }
 //This cuts out the opening for our circuit board
-translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
+//translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
 
 }
 //T-lock
@@ -83,4 +83,18 @@ translate([0,23,23])cube([5,10,8], center = true);
 translate([0,27,23])cube([10,5,5], center = true);
 translate([0,19,23])cube([10,5,5], center = true);
 }
+}
+
+module bean_cutout(){
+    //Below defines the dimensions for the Light Blue Bean module
+    xdim = 24;
+    ydim = 46;
+    zdim = 10;
+    rdim = 7;
+    hull(){
+        translate([rdim,rdim,0])cylinder(r=rdim,h=zdim);
+        translate([xdim-rdim,rdim,0])cylinder(r=rdim,h=zdim);
+        translate([rdim,ydim-rdim,0])cylinder(r=rdim,h=zdim);
+        translate([xdim-rdim,ydim-rdim,0])cylinder(r=rdim,h=zdim);
+    }
 }
