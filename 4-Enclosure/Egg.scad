@@ -74,12 +74,12 @@ intersection(){
 }
 //T-lock
 difference(){
-translate([0,-40,23])cube([5,10,8], center = true);
+translate([0,-40,23])cube([5,9,8.5], center = true);
 translate([0,-36,23])cube([10,5,5], center = true);
 translate([0,-44,23])cube([10,5,5], center = true);
 }
 difference(){
-translate([0,23,23])cube([5,10,8], center = true);
+translate([0,23,23])cube([5,9,8.5], center = true);
 translate([0,27,23])cube([10,5,5], center = true);
 translate([0,19,23])cube([10,5,5], center = true);
 }
