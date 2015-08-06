@@ -1,7 +1,7 @@
 // Egg Drop Egg
 // Matthew E. Nelson
-// August 2014
-// Revision 1
+// August 2015
+// Revision 2
 
 // Based on Parametric egg by
 // Nicholas C. Lewis 2011
@@ -70,7 +70,8 @@ intersection(){
 }
 //This cuts out the opening for our circuit board
 //translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
-
+//Light Pipe
+translate([4,-12,15])#cylinder(h = 40,r=3.1,$fn=fn);
 }
 //T-lock
 difference(){
@@ -84,6 +85,7 @@ translate([0,27,23])cube([10,5,5], center = true);
 translate([0,19,23])cube([10,5,5], center = true);
 }
 }
+
 
 module bean_cutout(){
     //Below defines the dimensions for the Light Blue Bean module
