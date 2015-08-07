@@ -71,18 +71,18 @@ intersection(){
 //This cuts out the opening for our circuit board
 //translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
 //Light Pipe
-translate([4,-12,15])#cylinder(h = 40,r=3.1,$fn=fn);
+translate([9,-11,-15])#cylinder(h = 70,r=3.1,$fn=fn);
 }
 //T-lock
 difference(){
 translate([0,-40,23])cube([5,9,8.5], center = true);
-translate([0,-36,23])cube([10,4,5], center = true);
-translate([0,-44,23])cube([10,4,5], center = true);
+translate([0,-36,23])cube([10,4,4], center = true);
+translate([0,-44,23])cube([10,4,4], center = true);
 }
 difference(){
 translate([0,23,23])cube([5,9,8.5], center = true);
-translate([0,27,23])cube([10,5,5], center = true);
-translate([0,19,23])cube([10,5,5], center = true);
+translate([0,27,23])cube([10,5,4], center = true);
+translate([0,19,23])cube([10,5,4], center = true);
 }
 }
 
