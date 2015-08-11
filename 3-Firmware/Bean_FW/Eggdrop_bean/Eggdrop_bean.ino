@@ -20,7 +20,7 @@ void setup() {
   // Setup the Bean serial port
   Serial.begin();
   // Set the acceleration range on the bean to +/- 4g
-  Bean.setAccelerationRange(4);
+  Bean.setAccelerationRange(2);
   // Enable Wake on Connection
   Bean.enableWakeOnConnect(true);
 }
@@ -29,7 +29,7 @@ void loop() {
   bool connected = false;
   connected = Bean.getConnectionState();
   uint16_t batt;
-  uint16_t mag;
+  int16_t mag;
   
   // Turn the Bean's LED green  
   Bean.setLed(0, 255, 0);
@@ -95,13 +95,20 @@ uint16_t batteryLevel(void)
 
 //Take the X,Y,Z acceleration and find the magnitude, then print this and return it
 
-uint16_t accelMagnitude(void)
+int16_t accelMagnitude(void)
 {
   
   AccelerationReading accel = {0, 0, 0};
   accel = Bean.getAcceleration();
-  uint32_t magnitude = sqrt(accel.xAxis*accel.xAxis + accel.yAxis * accel.yAxis + accel.zAxis * accel.zAxis);
-  Serial.println(magnitude, DEC);
+  int32_t magnitude = sqrt(accel.xAxis*accel.xAxis + accel.yAxis * accel.yAxis + accel.zAxis * accel.zAxis);
+  float gs = (magnitude * 2 * 1000L)/511;
+  Serial.println(gs, 3);
+  Serial.print(accel.xAxis,DEC);
+  Serial.print(",");
+  Serial.print(accel.yAxis,DEC);
+  Serial.print(",");
+  Serial.println(accel.zAxis,DEC);
+  return gs;
 
 }
 
