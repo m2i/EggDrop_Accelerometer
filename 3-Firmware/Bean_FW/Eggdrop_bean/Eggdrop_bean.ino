@@ -12,7 +12,7 @@
 */
 
 //Defines the threshold for a "broken" egg
-#define THRESHOLD 400
+#define THRESHOLD 1300
 //Set's the Acceleration range, choices are 2,4,8, or 16 +/- g
 #define RANGE 4
 
@@ -20,7 +20,7 @@ void setup() {
   // Setup the Bean serial port
   Serial.begin();
   // Set the acceleration range on the bean to +/- 4g
-  Bean.setAccelerationRange(2);
+  Bean.setAccelerationRange(RANGE);
   // Enable Wake on Connection
   Bean.enableWakeOnConnect(true);
 }
@@ -36,7 +36,7 @@ void loop() {
   Bean.sleep(20);
   Bean.setLed(0, 0, 0);
 
-  batt = batteryLevel();
+  //batt = batteryLevel();
   mag = accelMagnitude();
   
   
@@ -59,15 +59,15 @@ void loop() {
   //Serial.println(stringToPrintBatt);
 
   //Check to see if we "broke" the egg
-   //if(magnitude > THRESHOLD){
-    //Bean.setLed(255,0,0);
-    //Serial.println("I'm broke!");
-    //Serial.println("-------------------------");
-    //Bean.sleep(5000);
-   //}
+   if(mag > THRESHOLD){
+    Bean.setLed(255,0,0);
+    Serial.println("I'm broke!");
+    Serial.println("-------------------------");
+    Bean.sleep(15000);
+   }
   
   //This puts the bean into a sleep mode. 
-  Bean.sleep(150);
+  Bean.sleep(100);
 }
 
 //------------------------------------------------------------------------------------
@@ -100,15 +100,16 @@ int16_t accelMagnitude(void)
   
   AccelerationReading accel = {0, 0, 0};
   accel = Bean.getAcceleration();
-  int32_t magnitude = sqrt(accel.xAxis*accel.xAxis + accel.yAxis * accel.yAxis + accel.zAxis * accel.zAxis);
-  float gs = (magnitude * 2 * 1000L)/511;
-  Serial.println(gs, 3);
-  Serial.print(accel.xAxis,DEC);
-  Serial.print(",");
-  Serial.print(accel.yAxis,DEC);
-  Serial.print(",");
-  Serial.println(accel.zAxis,DEC);
-  return gs;
+  int32_t magnitude = sqrt((accel.xAxis*accel.xAxis) + (accel.yAxis * accel.yAxis) + (accel.zAxis * accel.zAxis));
+  int32_t gs = (magnitude * RANGE * 1000L)/511;
+  Serial.print("Accel:");
+  Serial.println(gs);
+  //Serial.print(accel.xAxis,DEC);
+  //Serial.print(",");
+  //Serial.print(accel.yAxis,DEC);
+  //Serial.print(",");
+  //Serial.println(accel.zAxis,DEC);
+  return (int16_t)gs;
 
 }
 
