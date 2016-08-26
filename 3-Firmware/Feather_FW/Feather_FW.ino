@@ -114,8 +114,17 @@ void error(uint8_t errno) {
 void loop() {
   //Turn on LED2
   digitalWrite(LED2, HIGH);
+  //Read the acceldata and battery voltage, create a data string
+  //Data string will have the follwoing format
+  //AccelX,AccelY,AccelZ,Battery
+  //m/s^2,m/s^2,m/s^2,voltage
+  String dataString = "";
+  dataString = lis.x + "," + lis.y + "," + lis.z + "," + battery();
+  
   // Read the battery voltage
   battery();
+  //Done, turn off LED
+  digitalWrite(LEDD2, LOW);
   delay(1000);
   
 
