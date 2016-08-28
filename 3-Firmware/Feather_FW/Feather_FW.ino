@@ -1,3 +1,26 @@
+/* Eggdrop Firmware
+ *  By:  Matthew E. Nelson
+ *  Version 2.0
+ *  New firmware for Eggdrop for AerE 160 using new Feather HW and LIS3DH Sensor
+ *  This firmware is used for the Eggdrop exercise in AerE 160 at Iowa State University
+ *  The purpose of this program is to record acceleration data that determines if an
+ *  egg "broke" or not.  Students will also use this data in future Matlab exercises
+ *  
+ */
+
+ /*Acknowledgements
+  * Portions of this code was from the SD Datalogger example and from Adafruit's 
+  * LIS3DH example code
+  */
+
+/* Hardware
+ *  The following hardware was used for this hardware
+ *  Adafruit Feather Datalogger
+ *  Adafruit LIS3DH Breakout board
+ *  3.7 VDC Li-Ion battery
+ *  4GB SD Card
+ */
+
 // include the SD library:
 #include <SPI.h>
 #include <SD.h>
@@ -17,7 +40,9 @@ const int chipSelect = 4;
 
 // Define some pins
 #define VBATPIN A9
+//This is the error LED, only lights up if there is a problem
 #define LED1 13
+//Operation LED
 #define LED2 8
 
 // I2C
@@ -41,6 +66,7 @@ void setup() {
   // we'll use the initialization code from the utility libraries
   // since we're just testing if the card is working!
   if (!card.init(SPI_HALF_SPEED, chipSelect)) {
+    //This flashes the error LED 2 times
     error(2);
     Serial.println("initialization failed. Things to check:");
     Serial.println("* is a card inserted?");
@@ -70,7 +96,8 @@ void setup() {
   Serial.println("Testing LIS3DH Sensor.....");
   
   if (! lis.begin(0x18)) {   // change this to 0x19 for alternative i2c address
-    Serial.println("Couldnt start");
+    Serial.println("Could not talk to LIS3DH Sensor!");
+    //Flashes the error LED 3 times for bad sensor
     error(3);
     while (1);
   }
@@ -80,6 +107,16 @@ void setup() {
   
   Serial.print("Range = "); Serial.print(2 << lis.getRange());  
   Serial.println("G");
+
+  //Check battery voltage
+  Serial.print("Checking battery voltage...");
+  float check_batt;
+  check_batt = battery();
+  Serial.println(check_batt);
+  if (check_batt < 3.3) {
+    Serial.println("BATTERY LOW!  RECHARGE!");
+    error(4);
+  }
 
 }
 
@@ -119,12 +156,27 @@ void loop() {
   //AccelX,AccelY,AccelZ,Battery
   //m/s^2,m/s^2,m/s^2,voltage
   String dataString = "";
-  dataString = lis.x + "," + lis.y + "," + lis.z + "," + battery();
+  dataString = String(lis.x) + "," + String(lis.y) + "," + String(lis.z) + "," + String(battery());
+
+  //Now write the data to the SD Card
+  File dataFile = SD.open("eggdrop.txt", FILE_WRITE);
+
+  // if the file is available, write to it:
+  if (dataFile) {
+    dataFile.println(dataString);
+    dataFile.close();
+    // print to the serial port too:
+    Serial.println(dataString);
+  }
+  // if the file isn't open, pop up an error:
+  else {
+    Serial.println("error opening datalog.txt");
+  }
   
   // Read the battery voltage
-  battery();
+  //battery();
   //Done, turn off LED
-  digitalWrite(LEDD2, LOW);
+  digitalWrite(LED2, LOW);
   delay(1000);
   
 
