@@ -17,7 +17,7 @@ fn = 150;
 
 function get_offset(a) = lookup(a, [[0, cos(45)],[60, cos(90)],[90, cos(70)]]);
 
-/*
+
 //Egg side A
 difference(){
 intersection(){
@@ -48,7 +48,7 @@ translate([-18,-38,23])#bean_cutout();
 //translate([0,23,18])cube([10,5,20], center = true);
 //translate([0,23,27])cube([11,11,3], center = true);
 }
-*/
+
 //Egg side B
 rotate([0,180,0]){
 difference(){
@@ -73,9 +73,10 @@ intersection(){
 //translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
 //Light Pipe
 //translate([9,-11,-15])#cylinder(h = 70,r=3.1,$fn=fn);
-}
+
 //This cuts out the opening for our circuit board
 translate([-18,-38,23])#bean_cutout();
+}
 //T-lock
 //difference(){
 //translate([0,-40,23])cube([5,9,8.5], center = true);

@@ -176,8 +176,8 @@ void loop() {
   logfile.println(battery());
   logfile.flush();
 
-  eggbreak = sqrt((event.acceleration.x*event.acceleration.x)+(event.acceleration.y*event.acceleration.y)+(event.acceleration.z+event.acceleration.z));
-  if (eggbreak > 16) {
+  eggbreak = sqrt((event.acceleration.x*event.acceleration.x)+(event.acceleration.y*event.acceleration.y)+(event.acceleration.z*event.acceleration.z));
+  if (eggbreak > 20) {
     digitalWrite(LED1,HIGH);
     logfile.println("EGGBREAK,EGGBREAK,EGGBREAK,EGGBREAK");
     logfile.flush();
