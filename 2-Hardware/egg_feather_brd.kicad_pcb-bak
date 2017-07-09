@@ -5,7 +5,7 @@
     (no_connects 0)
     (area 121.0601 93.298599 174.227 116.708601)
     (thickness 1.6)
-    (drawings 1)
+    (drawings 0)
     (tracks 39)
     (zones 0)
     (modules 5)
@@ -325,10 +325,6 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
     )
-  )
-
-  (gr_text "Eggdrop Feather Board\nMatthew E. Nelson\n2017" (at 143.764 107.95) (layer F.SilkS)
-    (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
 
   (segment (start 134.874 98.806) (end 136.0493 98.806) (width 0.25) (layer F.Cu) (net 1))

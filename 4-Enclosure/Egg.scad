@@ -1,14 +1,14 @@
 // Egg Drop Egg
 // Matthew E. Nelson
-// August 2016
-// Revision 3
+// July 2017
+// Revision 4
 
 // Based on Parametric egg by
 // Nicholas C. Lewis 2011
 // http://www.thingiverse.com/thing:7832
 
-radius=35;		//radius of egg
-stretch = 1.7;	//amount of "stretch" in the top half
+radius=34;		//radius of egg
+stretch = 1.9;	//amount of "stretch" in the top half
 angle = 90;		//angle of egg (0 is vertical, 90 is on side)
 base = 2;	  //Sets how far down for base, max 2.4.  Nominal 2
 cutout = 3; //Sets the depth of the cutout in the egg
@@ -38,7 +38,7 @@ intersection(){
 //translate([0,0,5])cube(40, center = true);
 }
 //This cuts out the opening for our circuit board
-translate([-18,-38,23])#bean_cutout();
+translate([-18,-42,17])#sensor_cutout();
 //T-lock
 //translate([-5,-45,18])cube([6,11,20], center = true);
 //translate([0,-45,18])cube([10,5,20], center = true);
@@ -75,7 +75,9 @@ intersection(){
 //translate([9,-11,-15])#cylinder(h = 70,r=3.1,$fn=fn);
 
 //This cuts out the opening for our circuit board
-translate([-18,-38,23])#bean_cutout();
+translate([-18,-42,17])#sensor_cutout();
+//This cuts out the opening for the switch
+translate([25,-10,20.5])#switch_cutout();
 }
 //T-lock
 //difference(){
@@ -91,10 +93,10 @@ translate([-18,-38,23])#bean_cutout();
 }
 
 
-module bean_cutout(){
-    //Below defines the dimensions for the Light Blue Bean module
-    xdim = 36;
-    ydim = 60;
+module sensor_cutout(){
+    //Below defines the dimensions for the sensor module
+    xdim = 37;
+    ydim = 65;
     zdim = 10;
     rdim = 3;
     hull(){
@@ -103,4 +105,12 @@ module bean_cutout(){
         translate([rdim,ydim-rdim,0])cylinder(r=rdim,h=zdim);
         translate([xdim-rdim,ydim-rdim,0])cylinder(r=rdim,h=zdim);
     }
+}
+
+module switch_cutout(){
+    //Define the dimensions of the switch, in this case Adafruit #805
+    xdim = 17;
+    ydim = 12;
+    zdim = 5;
+    cube([xdim,ydim,zdim],true);
 }

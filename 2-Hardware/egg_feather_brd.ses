@@ -1,0 +1,180 @@
+
+(session egg_feather_brd.ses
+  (base_design egg_feather_brd.dsn)
+  (placement
+    (resolution um 10)
+    (component LEDs:LED_D5.0mm
+      (place D1 1602740 -1000760 front 0)
+      (place D2 1602740 -1092200 front 0)
+    )
+    (component Buttons_Switches_THT:SW_DIP_x1_W7.62mm_Slide
+      (place SW1 1696720 -1084580 front 90)
+    )
+    (component Modules_Ian:ADAFRUIT_FEATHER
+      (place U1 1485010 -1050040 front 0)
+    )
+    (component Pin_Headers:Pin_Header_Straight_1x08_Pitch2.54mm
+      (place U2 1297940 -988060 front 90)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version 4.0.6)
+    )
+    (library_out 
+      (padstack "Via[0-1]_600:400_um"
+        (shape
+          (circle F.Cu 6000 0 0)
+        )
+        (shape
+          (circle B.Cu 6000 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+      (net "Net-(D1-Pad1)"
+        (wire
+          (path F.Cu 2500
+            1685467 -1084580
+            1680834 -1079947
+            1602740 -1079947
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1696720 -1084580
+            1685467 -1084580
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1602740 -1000760
+            1602740 -1079947
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1602740 -1092200
+            1602740 -1079947
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1370710 -1000760
+            1602740 -1000760
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1360493 -988060
+            1360493 -991733
+            1369520 -1000760
+            1370710 -1000760
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1370710 -1000760
+            1370710 -1151640
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1348740 -988060
+            1360493 -988060
+          )
+        )
+      )
+      (net "Net-(D1-Pad2)"
+        (wire
+          (path B.Cu 2500
+            1472310 -948440
+            1502814 -978944
+            1606324 -978944
+            1628140 -1000760
+          )
+        )
+      )
+      (net "Net-(D2-Pad2)"
+        (wire
+          (path B.Cu 2500
+            1497710 -948440
+            1512937 -963667
+            1668479 -963667
+            1708479 -1003667
+            1708479 -1012677
+            1628957 -1092199
+            1628140 -1092199
+            1628140 -1092200
+          )
+        )
+      )
+      (net "Net-(SW1-Pad2)"
+        (wire
+          (path B.Cu 2500
+            1696720 -1008380
+            1685467 -1008380
+          )
+        )
+        (wire
+          (path B.Cu 2500
+            1421510 -948440
+            1433654 -960584
+            1469133 -960584
+            1521590 -1013041
+            1680806 -1013041
+            1685467 -1008380
+          )
+        )
+      )
+      (net "Net-(U1-Pad15)"
+        (wire
+          (path B.Cu 2500
+            1323340 -988060
+            1323340 -1148210
+            1319910 -1151640
+          )
+        )
+      )
+      (net "Net-(U1-Pad27)"
+        (wire
+          (path F.Cu 2500
+            1374140 -988060
+            1385893 -988060
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1385893 -988060
+            1385893 -984387
+            1402494 -967786
+            1630764 -967786
+            1650110 -948440
+          )
+        )
+      )
+      (net "Net-(U1-Pad28)"
+        (wire
+          (path F.Cu 2500
+            1399540 -988060
+            1411293 -988060
+          )
+        )
+        (wire
+          (path F.Cu 2500
+            1411293 -988060
+            1411293 -984386
+            1419372 -976307
+            1647643 -976307
+            1675510 -948440
+          )
+        )
+      )
+    )
+  )
+)
