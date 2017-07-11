@@ -1,23 +1,26 @@
-// Egg Drop Egg
-// Matthew E. Nelson
-// July 2017
-// Revision 4
-
-// Based on Parametric egg by
-// Nicholas C. Lewis 2011
-// http://www.thingiverse.com/thing:7832
-
-// Standoffs code from Steven Nemetz
+// Standoff Generator Module
+//
+// Author: Steven Nemetz
+//
 // Current version: https://github.com/snemetz/OpenSCAD-Modules/tree/master/standoffs
 // Customizable: http://www.thingiverse.com/thing:1528494
+/*
+	REVISION HISTORY
+	v0.2 Added Array-Same generation
+	v0.1 Added hollow style
+	Initial code refactored from :
+		eriqjo's Standoff Customizer v1.0
+			http://www.thingiverse.com/thing:351092
+		and Kevin Osborn's Snap in PCB Standoff
+*/
+// TODO: Future Feature Ideas
+//	flanges: top and/or bottom
+//	flange styles:
+//	bottom styles: support all top styles - rotate 180 and translate top
+//	Look at adding features from http://www.thingiverse.com/thing:79944
+//		or original http://www.thingiverse.com/thing:44894
+//	threads for male & female
 
-egg_radius=34;		//radius of egg
-stretch = 1.9;	//amount of "stretch" in the top half
-angle = 90;		//angle of egg (0 is vertical, 90 is on side)
-base = 2;	  //Sets how far down for base, max 2.4.  Nominal 2
-cutout = 3; //Sets the depth of the cutout in the egg
-
-//Standoffs
 //CUSTOMIZER VARIABLES
 
 //Type of standoff(s) to generate
@@ -26,21 +29,21 @@ Generate = 2; // [1:Single, 2:Array-Same, 3:Array-Samples]
 //Choose shape of the main body
 Shape = 1; // [1:Round, 2:Square, 3:Hex]
 //Select height of the main body,  mm
-BaseHeight = 7; // [0:50]
+BaseHeight = 10; // [0:50]
 //Select diameter of the main body, mm
 BaseDia = 6; // [0:30]
 /* [Top] */
 //Choose style of the top section
 Style = 4; // [1:Male, 2:Snap-In, 3:Flat, 4:Female, 5:Hollow]
 //Select height of the top, mm
-TopHeight = 4; // [2:20]
+TopHeight = 5; // [2:20]
 //Select diameter of the top, mm
 TopDia = 2.5; // [1:25]
 /* [Array Settings] */
 //For array: Space between standoffs, X mm
-X_Offset = 46; // [2:30]
+X_Offset = 51; // [2:30]
 //For array: Space between standoffs, Y mm
-Y_Offset = 18; // [2:30]
+Y_Offset = 23; // [2:30]
 //For Array-Same
 Columns = 2;
 //For Array-Same
@@ -54,114 +57,6 @@ Shapes = [1:3]; // All valid shapes
 Styles = [1:5]; // All valid styles
 
 RndFrags = 50; // number of facet fragments for round shapes
-
-fn = 150;
-
-function get_offset(a) = lookup(a, [[0, cos(45)],[60, cos(90)],[90, cos(70)]]);
-
-
-//Egg side A
-difference(){
-intersection(){
-	echo(get_offset(angle));
-	translate([0,0,83])cube(base*stretch*egg_radius, center = true);
-	translate([0,0,get_offset(angle)*egg_radius])rotate([angle,0,0]){
-		union(){
-			intersection(){
-				//translate([0,0,0])cube(90, center = true);
-				scale([1,1,stretch])sphere(r=egg_radius, $fn=fn);
-				translate([0,0,stretch*egg_radius])cube(2*stretch*egg_radius, center = true);
-				//translate([0,-40,0])cube(90, center = true);
-			}
-			sphere(r=egg_radius, $fn=fn);
-			
-		}
-	}
-//translate([0,0,5])cube(40, center = true);
-}
-//This cuts out the opening for our circuit board
-translate([-18,-42,17])#sensor_cutout();
-//T-lock
-//translate([-5,-45,18])cube([6,11,20], center = true);
-//translate([0,-45,18])cube([10,5,20], center = true);
-//translate([0,-45,27])cube([11,11,3], center = true);
-
-//translate([-5,23,18])cube([6,11,20], center = true);
-//translate([0,23,18])cube([10,5,20], center = true);
-//translate([0,23,27])cube([11,11,3], center = true);
-}
-
-//Egg side B
-rotate([0,180,0]){
-difference(){
-intersection(){
-	echo(get_offset(angle));
-	translate([0,0,83])cube(base*stretch*egg_radius, center = true);
-	translate([0,0,get_offset(angle)*egg_radius])rotate([angle,0,0]){
-		union(){
-			intersection(){
-				//translate([0,0,0])cube(90, center = true);
-				scale([1,1,stretch])sphere(r=egg_radius, $fn=fn);
-				translate([0,0,stretch*egg_radius])cube(2*stretch*egg_radius, center = true);
-				//translate([0,-40,0])cube(90, center = true);
-			}
-			sphere(r=egg_radius, $fn=fn);
-			
-		}
-	}
-//translate([0,0,5])cube(40, center = true);
-}
-//This cuts out the opening for our circuit board
-//translate([0,-8,26])#cube([34.5,47.5,cutout], center = true);
-//Light Pipe
-//translate([9,-11,-15])#cylinder(h = 70,r=3.1,$fn=fn);
-
-//This cuts out the opening for our circuit board
-translate([-18,-42,17])#sensor_cutout();
-//This cuts out the opening for the switch
-translate([25,-10,20.5])#switch_cutout();
-}
-
-//standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
-
-//T-lock
-//difference(){
-//translate([0,-40,23])cube([5,9,8.5], center = true);
-//translate([0,-36,23])cube([10,4,4], center = true);
-//translate([0,-44,23])cube([10,4,4], center = true);
-//}
-//difference(){
-//translate([0,23,23])cube([5,9,8.5], center = true);
-//translate([0,27,23])cube([10,5,4], center = true);
-//translate([0,19,23])cube([10,5,4], center = true);
-//}
-}
-
-//Modules
-
-//Egg Modules
-module sensor_cutout(){
-    //Below defines the dimensions for the sensor module
-    xdim = 37;
-    ydim = 65;
-    zdim = 10;
-    rdim = 3;
-    hull(){
-        translate([rdim,rdim,0])cylinder(r=rdim,h=zdim);
-        translate([xdim-rdim,rdim,0])cylinder(r=rdim,h=zdim);
-        translate([rdim,ydim-rdim,0])cylinder(r=rdim,h=zdim);
-        translate([xdim-rdim,ydim-rdim,0])cylinder(r=rdim,h=zdim);
-    }
-}
-
-module switch_cutout(){
-    //Define the dimensions of the switch, in this case Adafruit #805
-    xdim = 17;
-    ydim = 12;
-    zdim = 5;
-    cube([xdim,ydim,zdim],true);
-}
-
 // Parameters: style, height, diameter, Thread_Height
 module standoffTop(style, baseHeight, topHeight, diameter) {
 	radius = diameter/2;
@@ -230,13 +125,12 @@ module standoff(shape, baseHeight, baseDiameter, style, topHeight, topDiameter) 
 
 function range2vector(r) = [ for (i=r) i];
 
+//
 ShapesV = range2vector(Shapes);
 StylesV = range2vector(Styles);
 if (Generate == 1) { // single
 	standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
 } else if (Generate == 2) { // array all same
-    rotate([0,0,90])
-    translate([-10,0,-25])
 	translate([-(X_Offset * (Rows+1))/2, -(Y_Offset * (Columns+1))/2, 0])
 		union(){
 			for (j = [1 : Rows]){
@@ -247,4 +141,17 @@ if (Generate == 1) { // single
 					} // for
 			} // for
 		}; // union
+} else if (Generate == 3) { // array Samples
+	translate([-(X_Offset * (len(StylesV)+1))/2, -(Y_Offset * (len(ShapesV)+1))/2, 0])
+		union(){
+			for (shape = Shapes) {     // Rows of styles = row of a shape
+				translate([0,shape * Y_Offset,0])
+					for( style = Styles) {   // Columns of shapes = column of a style
+						translate([style * X_Offset,0,0])
+							standoff(shape, BaseHeight, BaseDia, style, TopHeight, TopDia);
+					} // for
+			} // for
+		}; // union
 };
+
+// END
