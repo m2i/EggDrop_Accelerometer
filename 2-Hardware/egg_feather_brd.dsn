@@ -21,7 +21,7 @@
       )
     )
     (boundary
-      (rect pcb 121060 -93298.6 174227 -116709)
+      (rect pcb 121060 -92747 176005 -116709)
     )
     (via "Via[0-1]_600:400_um")
     (rule
@@ -33,17 +33,17 @@
   )
   (placement
     (component LEDs:LED_D5.0mm
-      (place D1 160274 -100076 front 0 (PN LED))
-      (place D2 160274 -109220 front 0 (PN LED))
+      (place D1 162814 -101346 front 90 (PN LED))
+      (place D2 162814 -108458 front 270 (PN LED))
     )
     (component Buttons_Switches_THT:SW_DIP_x1_W7.62mm_Slide
-      (place SW1 169672 -108458 front 90 (PN SWITCH_SPST))
+      (place SW1 171450 -109220 front 90 (PN SWITCH_SPST))
     )
     (component Modules_Ian:ADAFRUIT_FEATHER
       (place U1 148501 -105004 front 0 (PN ADAFRUIT_FEATHER))
     )
     (component Pin_Headers:Pin_Header_Straight_1x08_Pitch2.54mm
-      (place U2 129794 -98806 front 90 (PN LIS3DH_BOB))
+      (place U2 129540 -112522 front 180 (PN LIS3DH_BOB))
     )
   )
   (library
@@ -212,7 +212,7 @@
       (pins D1-1 D2-1 SW1-1 U1-13 U2-3)
     )
     (net "Net-(D1-Pad2)"
-      (pins D1-2 U1-20)
+      (pins D1-2 U1-22)
     )
     (net "Net-(D2-Pad2)"
       (pins D2-2 U1-21)
@@ -230,13 +230,7 @@
       (pins U1-28 U2-5)
     )
     (class kicad_default "" "Net-(D1-Pad1)" "Net-(D1-Pad2)" "Net-(D2-Pad2)"
-      "Net-(SW1-Pad2)" "Net-(U1-Pad1)" "Net-(U1-Pad10)" "Net-(U1-Pad11)" "Net-(U1-Pad12)"
-      "Net-(U1-Pad14)" "Net-(U1-Pad15)" "Net-(U1-Pad16)" "Net-(U1-Pad17)"
-      "Net-(U1-Pad19)" "Net-(U1-Pad2)" "Net-(U1-Pad22)" "Net-(U1-Pad23)" "Net-(U1-Pad24)"
-      "Net-(U1-Pad25)" "Net-(U1-Pad26)" "Net-(U1-Pad27)" "Net-(U1-Pad28)"
-      "Net-(U1-Pad3)" "Net-(U1-Pad4)" "Net-(U1-Pad5)" "Net-(U1-Pad6)" "Net-(U1-Pad7)"
-      "Net-(U1-Pad8)" "Net-(U1-Pad9)" "Net-(U2-Pad1)" "Net-(U2-Pad6)" "Net-(U2-Pad7)"
-      "Net-(U2-Pad8)"
+      "Net-(SW1-Pad2)" "Net-(U1-Pad15)" "Net-(U1-Pad27)" "Net-(U1-Pad28)"
       (circuit
         (use_via Via[0-1]_600:400_um)
       )
