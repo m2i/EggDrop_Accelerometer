@@ -1,6 +1,8 @@
 /* Eggdrop Firmware
  *  By:  Matthew E. Nelson
- *  Version 2.0
+ *  SW Version 2.5
+ *  Compatible HW Rev - Rev E
+ *  Updated - July 2017
  *  New firmware for Eggdrop for AerE 160 using new Feather HW and LIS3DH Sensor
  *  This firmware is used for the Eggdrop exercise in AerE 160 at Iowa State University
  *  The purpose of this program is to record acceleration data that determines if an
@@ -37,15 +39,32 @@
 #include <Adafruit_LIS3DH.h>
 #include <Adafruit_Sensor.h>
 
-// Set CS pin, for Feather this is Pin 4
+// Set CS pin, for Feather this is Pin 4 on feather
 const int chipSelect = 4;
 
 // Define some pins
 #define VBATPIN A9
-//This is the error LED, only lights up if there is a problem
-#define LED1 13
-//Operation LED
-#define LED2 8
+//This is the Red LED, Error and if the egg break
+#define LED1 11
+//Operation LED - Green, lights up during data recording
+#define LED2 12
+// The following LEDs are on the feather board and are used mostly for debugging
+#define DEBUG1 13
+#define DEBUG2 8
+
+//This defines at what level the egg is "broken:
+#define EGG_LIMIT 20
+
+// Define the number of samples to keep track of. The higher the number, the
+// more the readings will be smoothed, but the slower the output will respond to
+// the input. Using a constant rather than a normal variable lets us use this
+// value to determine the size of the readings array.
+const int numReadings = 10;
+
+int readings[numReadings];      // the readings from the analog input
+int readIndex = 0;              // the index of the current reading
+int total = 0;                  // the running total
+int average = 0;                // the average
 
 // I2C
 Adafruit_LIS3DH lis = Adafruit_LIS3DH();
@@ -65,35 +84,40 @@ float battery(void) {
 }
 
 // blink out an error code
+// When we have an error, we will sit here forever since there is a problem that needs to be addressed
 void error(uint8_t errno) {
   while(1) {
     uint8_t i;
     for (i=0; i<errno; i++) {
       digitalWrite(LED1, HIGH);
-      delay(300);
+      digitalWrite(DEBUG1, HIGH);
+      delay(200);
       digitalWrite(LED1, LOW);
+      digitalWrite(DEBUG1, LOW);
       delay(300);
     }
     for (i=errno; i<10; i++) {
-      delay(1000);
+      delay(500);
     }
   }
 }
 
 
 void setup() {
-  // initialize digital pin 13 as an output.
+  // initialize digital pins 8,11,12,13 as an output.
   pinMode(13, OUTPUT);
-  // initialize digital pin 8 as an output.
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
   pinMode(8, OUTPUT);
+  // initialize all the readings to 0:
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+    readings[thisReading] = 0;
+  }
   //Setup Serial port for debugging
   Serial.begin(57600);
   Serial.println("\r\nEggDrop Datalogger");
   Serial.println("\r\nFW Rev: 0.1");
   Serial.println("\r\nChecking SD Card");
-  delay(2000);
-  Serial.print("\nInitializing SD card...");
-
   // we'll use the initialization code from the utility libraries
   // since we're just testing if the card is working!
   if (!SD.begin(chipSelect)) {
@@ -101,13 +125,15 @@ void setup() {
     Serial.println("Card init. failed!");
     error(2);
   }
+  delay(2000);
+  Serial.println("\nInitializing SD card...");
 
   // create a new file
   char filename[15];
-  strcpy(filename, "ANALOG00.TXT");
+  strcpy(filename, "EGG00.TXT");
   for (uint8_t i = 0; i < 100; i++) {
-    filename[6] = '0' + i/10;
-    filename[7] = '0' + i%10;
+    filename[3] = '0' + i/10;
+    filename[4] = '0' + i%10;
     // create if does not exist, do not open existing, write, sync after write
     if (! SD.exists(filename)) {
       break;
@@ -116,7 +142,7 @@ void setup() {
 
   logfile = SD.open(filename, FILE_WRITE);
   if( ! logfile ) {
-    Serial.print("Couldnt create "); 
+    Serial.print("Could not create "); 
     Serial.println(filename);
     error(5);
   }
@@ -175,16 +201,41 @@ void loop() {
   logfile.print(",");
   logfile.println(battery());
   logfile.flush();
-
+  
+  //Calculate the square sum of the X, Y and Z direction
   eggbreak = sqrt((event.acceleration.x*event.acceleration.x)+(event.acceleration.y*event.acceleration.y)+(event.acceleration.z*event.acceleration.z));
-  if (eggbreak > 20) {
+  
+  //Now we want to start our running average
+  // subtract the last reading:
+  total = total - readings[readIndex];
+  // read from the sensor:
+  readings[readIndex] = eggbreak;
+  // add the reading to the total:
+  total = total + readings[readIndex];
+  // advance to the next position in the array:
+  readIndex = readIndex + 1;
+
+  // if we're at the end of the array...
+  if (readIndex >= numReadings) {
+    // ...wrap around to the beginning:
+    readIndex = 0;
+  }
+
+  // calculate the average:
+  average = total / numReadings;
+
+  //For debugging we are going to print the average Accel and battery level
+  Serial.print("VBat: " ); Serial.println(measuredvbat);
+  Serial.print("Avg Accel: " ); Serial.println(average);
+  
+  if (average > EGG_LIMIT) {
     digitalWrite(LED1,HIGH);
     logfile.println("EGGBREAK,EGGBREAK,EGGBREAK,EGGBREAK");
     logfile.flush();
+    Serial.print("EGGBREAK DETECTED!!!");
   }
   //Done, turn off LED
   digitalWrite(LED2, LOW);
-  delay(200);
+  delay(100);
   
-
 }
