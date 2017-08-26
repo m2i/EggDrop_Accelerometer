@@ -225,7 +225,8 @@ void loop() {
   average = total / numReadings;
 
   //For debugging we are going to print the average Accel and battery level
-  Serial.print("VBat: " ); Serial.println(measuredvbat);
+  float battv = battery();
+  Serial.print("VBat: " ); Serial.println(battv);
   Serial.print("Avg Accel: " ); Serial.println(average);
   
   if (average > EGG_LIMIT) {
