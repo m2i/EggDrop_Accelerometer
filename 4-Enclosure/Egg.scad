@@ -11,7 +11,7 @@
 // Current version: https://github.com/snemetz/OpenSCAD-Modules/tree/master/standoffs
 // Customizable: http://www.thingiverse.com/thing:1528494
 
-egg_radius=34;		//radius of egg
+egg_radius=35;		//radius of egg
 stretch = 1.9;	//amount of "stretch" in the top half
 angle = 90;		//angle of egg (0 is vertical, 90 is on side)
 base = 2;	  //Sets how far down for base, max 2.4.  Nominal 2
@@ -80,7 +80,7 @@ intersection(){
 //translate([0,0,5])cube(40, center = true);
 }
 //This cuts out the opening for our circuit board
-translate([-18,-42,17])#sensor_cutout();
+translate([-18,-42,16])#sensor_cutout();
 //T-lock
 //translate([-5,-45,18])cube([6,11,20], center = true);
 //translate([0,-45,18])cube([10,5,20], center = true);
@@ -117,9 +117,9 @@ intersection(){
 //translate([9,-11,-15])#cylinder(h = 70,r=3.1,$fn=fn);
 
 //This cuts out the opening for our circuit board
-translate([-18,-42,17])#sensor_cutout();
+translate([-18,-42,16])#sensor_cutout();
 //This cuts out the opening for the switch
-translate([25,-10,20.5])#switch_cutout();
+translate([26.5,-10,18.5])#switch_cutout();
 }
 
 //standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
@@ -144,7 +144,7 @@ module sensor_cutout(){
     //Below defines the dimensions for the sensor module
     xdim = 37;
     ydim = 65;
-    zdim = 10;
+    zdim = 15;
     rdim = 3;
     hull(){
         translate([rdim,rdim,0])cylinder(r=rdim,h=zdim);
@@ -228,23 +228,23 @@ module standoff(shape, baseHeight, baseDiameter, style, topHeight, topDiameter) 
 	}
 };
 
-function range2vector(r) = [ for (i=r) i];
+//function range2vector(r) = [ for (i=r) i];
 
-ShapesV = range2vector(Shapes);
-StylesV = range2vector(Styles);
-if (Generate == 1) { // single
-	standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
-} else if (Generate == 2) { // array all same
-    rotate([0,0,90])
-    translate([-10,0,-25])
-	translate([-(X_Offset * (Rows+1))/2, -(Y_Offset * (Columns+1))/2, 0])
-		union(){
-			for (j = [1 : Rows]){
-				translate([0,j * Y_Offset,0])
-					for( i = [1 : Columns]){
-						translate([i * X_Offset,0,0])
-							standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
-					} // for
-			} // for
-		}; // union
-};
+//ShapesV = range2vector(Shapes);
+//StylesV = range2vector(Styles);
+//if (Generate == 1) { // single
+//	standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
+//} else if (Generate == 2) { // array all same
+//    rotate([0,0,90])
+//    translate([-10,0,-25])
+//	translate([-(X_Offset * (Rows+1))/2, -(Y_Offset * (Columns+1))/2, 0])
+//		union(){
+//			for (j = [1 : Rows]){
+//				translate([0,j * Y_Offset,0])
+//					for( i = [1 : Columns]){
+//						translate([i * X_Offset,0,0])
+//							standoff(Shape,BaseHeight,BaseDia,Style,TopHeight,TopDia);
+//					} // for
+//			} // for
+//		}; // union
+//};
