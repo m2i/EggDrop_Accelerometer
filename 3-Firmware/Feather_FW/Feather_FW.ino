@@ -53,7 +53,7 @@ const int chipSelect = 4;
 #define DEBUG2 8
 
 //This defines at what level the egg is "broken:
-#define EGG_LIMIT 20
+#define EGG_LIMIT 10
 
 // Define the number of samples to keep track of. The higher the number, the
 // more the readings will be smoothed, but the slower the output will respond to
