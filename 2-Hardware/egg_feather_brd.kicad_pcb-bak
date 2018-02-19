@@ -3,9 +3,9 @@
   (general
     (links 10)
     (no_connects 0)
-    (area 121.06 92.746999 176.005 116.709001)
+    (area 121.336999 92.380999 174.827001 117.423001)
     (thickness 1.6)
-    (drawings 1)
+    (drawings 6)
     (tracks 35)
     (zones 0)
     (modules 5)
@@ -327,6 +327,11 @@
     )
   )
 
+  (gr_line (start 121.412 92.456) (end 121.92 92.456) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 121.412 117.348) (end 121.412 92.456) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 174.752 117.348) (end 121.412 117.348) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 174.752 92.456) (end 174.752 117.348) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 121.92 92.456) (end 174.752 92.456) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_text "Eggdrop Feather Board\nMatthew E. Nelson\n2017" (at 145.796 106.172) (layer F.SilkS)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
