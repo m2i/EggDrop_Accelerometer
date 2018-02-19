@@ -28,8 +28,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:MiscellaneousDevices
-LIBS:Sensors
 LIBS:egg_feather_brd-cache
 EELAYER 25 0
 EELAYER END
@@ -100,12 +98,6 @@ F 3 "" H 4900 5200 60  0000 C CNN
 	1    4900 5200
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5050 4250 6200 4250
-Wire Wire Line
-	6200 4250 6200 4550
-Wire Wire Line
-	6200 4550 6300 4550
 Wire Wire Line
 	5050 4700 6200 4700
 Wire Wire Line
@@ -180,4 +172,10 @@ Wire Wire Line
 Wire Wire Line
 	6000 5350 6300 5350
 Connection ~ 6150 2700
+Wire Wire Line
+	5050 4250 5200 4250
+Wire Wire Line
+	5200 4250 5200 4750
+Wire Wire Line
+	5200 4750 6300 4750
 $EndSCHEMATC
