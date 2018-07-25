@@ -1,36 +1,6 @@
-EESchema Schematic File Version 2
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:Sensors
+EESchema Schematic File Version 4
 LIBS:egg_feather_brd-cache
-EELAYER 25 0
+EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
@@ -45,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L ADAFRUIT_FEATHER U1
+L egg_feather_brd-rescue:ADAFRUIT_FEATHER U1
 U 1 1 5955C01D
 P 6550 4800
 F 0 "U1" V 6750 4250 60  0000 C CNN
@@ -56,7 +26,7 @@ F 3 "" H 6700 4600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L ADAFRUIT_FEATHER U1
+L egg_feather_brd-rescue:ADAFRUIT_FEATHER U1
 U 2 1 5955C0DA
 P 6600 3150
 F 0 "U1" V 6800 2600 60  0000 C CNN
@@ -67,7 +37,7 @@ F 3 "" H 6750 2950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D2
+L Device:LED D2
 U 1 1 5955CFB2
 P 4900 4700
 F 0 "D2" H 4900 4800 50  0000 C CNN
@@ -78,7 +48,7 @@ F 3 "" H 4900 4700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D1
+L Device:LED D1
 U 1 1 5955D02F
 P 4900 4250
 F 0 "D1" H 4900 4350 50  0000 C CNN
@@ -89,7 +59,7 @@ F 3 "" H 4900 4250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SWITCH_SPST SW1
+L egg_feather_brd-rescue:SWITCH_SPST SW1
 U 1 1 5955E018
 P 4900 5200
 F 0 "SW1" H 4900 5350 60  0000 C CNN
@@ -108,7 +78,7 @@ Wire Wire Line
 Wire Wire Line
 	4750 4250 4550 4250
 Wire Wire Line
-	4550 2700 4550 5200
+	4550 2700 4550 4250
 Wire Wire Line
 	4550 4700 4750 4700
 Connection ~ 4550 4250
@@ -122,7 +92,7 @@ Wire Wire Line
 	4550 5200 4700 5200
 Connection ~ 4550 4700
 $Comp
-L LIS3DH_BOB U2
+L egg_feather_brd-rescue:LIS3DH_BOB U2
 U 1 1 595FB4D9
 P 8750 3000
 F 0 "U2" H 8750 3000 60  0000 C CNN
@@ -151,7 +121,7 @@ Wire Wire Line
 Wire Wire Line
 	6150 2100 6150 2700
 Wire Wire Line
-	4550 2700 6350 2700
+	4550 2700 6150 2700
 Wire Wire Line
 	8050 3300 7500 3300
 Wire Wire Line
@@ -179,4 +149,10 @@ Wire Wire Line
 	5200 4250 5200 4750
 Wire Wire Line
 	5200 4750 6300 4750
+Wire Wire Line
+	4550 4250 4550 4700
+Wire Wire Line
+	4550 4700 4550 5200
+Wire Wire Line
+	6150 2700 6350 2700
 $EndSCHEMATC
