@@ -227,7 +227,9 @@ void loop() {
   }
 
   // calculate the average:
-  average = total / numReadings;
+  if(readIndex>=span){//make sure there is enough data to care
+    average = total / span;
+  }
 
   //For debugging we are going to print the average Accel and battery level
   float battv = battery();
