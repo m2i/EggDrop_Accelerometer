@@ -201,17 +201,21 @@ void loop() {
   logfile.print(",");
   logfile.println(battery());
   logfile.flush();
-  
+  int span = 5;
+  bool looped = false;
   //Calculate the square sum of the X, Y and Z direction
   eggbreak = sqrt((event.acceleration.x*event.acceleration.x)+(event.acceleration.y*event.acceleration.y)+(event.acceleration.z*event.acceleration.z));
-  
-  //Now we want to start our running average
-  // subtract the last reading:
-  total = total - readings[readIndex];
+  // Running Average
   // read from the sensor:
   readings[readIndex] = eggbreak;
   // add the reading to the total:
-  total = total + readings[readIndex];
+  total = 0.0; // best to just start at zero
+  // now get the last span worth of values
+  for(int i=0;i<span;i++){
+    if(readIndex>=span){//make sure there is enough data to care
+      total = total + readings[readIndex-i];
+    }
+  }
   // advance to the next position in the array:
   readIndex = readIndex + 1;
 
@@ -219,6 +223,7 @@ void loop() {
   if (readIndex >= numReadings) {
     // ...wrap around to the beginning:
     readIndex = 0;
+    looped = true;
   }
 
   // calculate the average:
