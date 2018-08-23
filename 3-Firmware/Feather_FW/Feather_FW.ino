@@ -53,18 +53,18 @@ const int chipSelect = 4;
 #define DEBUG2 8
 
 //This defines at what level the egg is "broken:
-#define EGG_LIMIT 10
+#define EGG_LIMIT 20
 
 // Define the number of samples to keep track of. The higher the number, the
 // more the readings will be smoothed, but the slower the output will respond to
 // the input. Using a constant rather than a normal variable lets us use this
 // value to determine the size of the readings array.
-const int numReadings = 10;
+const int numReadings = 100;
 
-int readings[numReadings];      // the readings from the analog input
+float readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
-int total = 0;                  // the running total
-int average = 0;                // the average
+float total = 0;                  // the running total
+float average = 0;                // the average
 
 // I2C
 Adafruit_LIS3DH lis = Adafruit_LIS3DH();
