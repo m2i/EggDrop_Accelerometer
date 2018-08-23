@@ -150,7 +150,7 @@ void setup() {
   Serial.println(filename);
 
   //Now let's print a header to identify the columns
-  logfile.println("Acceleration is in m/s^2");
+  // logfile.println("Acceleration is in m/s^2");
   logfile.println("Accel_X,ACCEL_Y,ACCEL_Z,Voltage");
   logfile.flush();
   
